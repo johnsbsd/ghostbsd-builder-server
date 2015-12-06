@@ -1,0 +1,5 @@
+#!/bin/sh
+
+    poudriere jail -l
+
+exit 0

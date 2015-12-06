@@ -1,0 +1,4 @@
+#!/bin/sh
+
+poudriere ports -l
+exit 0

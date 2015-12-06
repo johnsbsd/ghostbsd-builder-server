@@ -1,0 +1,14 @@
+#!/bin/sh
+
+# $1 is arch of packages
+# $2 is FBSD-RELEASE in form 10.1-RELEASE xx-STABLE or xx-CURRENT
+case "$1" in
+    i386)
+    poudriere -c -j packages_$1 -v $2
+    ;;
+    amd64)
+    poudriere -c -j packages_$1 -v $2
+    ;;
+esac
+
+exit 0

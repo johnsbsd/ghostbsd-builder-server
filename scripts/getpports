@@ -1,0 +1,4 @@
+#!/bin/sh
+
+poudriere ports -c -p HEAD
+exit 0
