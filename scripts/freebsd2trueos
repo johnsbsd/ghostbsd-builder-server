@@ -15,4 +15,6 @@ if [ ! -f "${dist}/kernel.txz" ] ; then
   fetch http://download.trueos.org/master/amd64/dist/kernel.txz
 fi
 cd ${dist}
+chflags -R noschg
 tar -zxvf kernel.txz -C ${release}
+tar -zxvf base.txz -C ${release}
