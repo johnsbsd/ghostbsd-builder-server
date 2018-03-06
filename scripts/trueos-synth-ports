@@ -1,0 +1,5 @@
+#!/bin/sh
+rm -rf /builder/ports
+mkdir /builder/ports | true
+fetch https://codeload.github.com/trueos/freebsd-ports/zip/trueos-master --no-verify-peer
+tar --strip-components=1 -xf trueos-master -C /builder/ports/
