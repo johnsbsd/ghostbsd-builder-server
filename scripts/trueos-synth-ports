@@ -1,5 +1,13 @@
 #!/bin/sh
-rm -rf /builder/ports
-mkdir /builder/ports | true
+ports="/builder/ports"
+
+if [ -d "${ports}" ] ; then
+  rm -rf ${ports}
+fi
+
+if [ ! -d "${ports}" ] ; then
+  mkdir ${ports}
+fi
+
 fetch https://codeload.github.com/trueos/freebsd-ports/zip/trueos-master --no-verify-peer
-tar --strip-components=1 -xf trueos-master -C /builder/ports/
+tar --strip-components=1 -xf trueos-master -C ${ports}
