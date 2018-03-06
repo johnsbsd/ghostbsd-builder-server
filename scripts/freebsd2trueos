@@ -4,6 +4,16 @@ dist="/usr/dist"
 etcbackup="/usr/etcbackup/"
 release="/"
 
+if [ -d "/usr/local/etc/pkg/repos/" ] ; then
+  rm -rf /usr/local/etc/pkg/repos/
+fi
+
+if [ -f "/usr/local/etc/pkg.conf" ] ; then
+  rm /usr/local/etc/pkg.conf
+fi
+
+cp -R trueos-repo/ /
+
 if [ ! -d "${dist}" ] ; then
   mkdir ${dist}
 fi
