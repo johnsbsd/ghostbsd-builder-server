@@ -1,10 +1,15 @@
 #!/bin/sh
 
 dist="/usr/dist"
+etcbackup="/usr/etcbackup/"
 release="/"
 
 if [ ! -d "${dist}" ] ; then
   mkdir ${dist}
+fi
+if [ ! -d "${etcbackup}" ] ; then
+  mkdir ${etcbackup}
+  cp -R /etc/ ${etcbackup}"
 fi
 if [ ! -f "${dist}/base.txz" ] ; then 
   cd ${dist}
@@ -14,7 +19,13 @@ if [ ! -f "${dist}/kernel.txz" ] ; then
   cd ${dist}
   fetch http://download.trueos.org/master/amd64/dist/kernel.txz
 fi
+
 cd ${dist}
 chflags -R noschg
 tar -zxvf kernel.txz -C ${release}
 tar -zxvf base.txz -C ${release}
+sysrc -f /boot/defaults/loader.conf boot_mute="NO"
+cp ${etcbackup}master.passwd /etc/master.passwd
+cp ${etcbackup}passwd /etc/passwd
+cp ${etcbackup}group /etc/group
+ln -s /etc/init.d/sshd /etc/runlevels/boot/sshd
