@@ -24,8 +24,9 @@ cd ${dist}
 chflags -R noschg /
 tar -zxvf kernel.txz -C ${release}
 tar -zxvf base.txz -C ${release}
-sysrc -f /boot/defaults/loader.conf boot_mute="NO"
 cp ${etcbackup}master.passwd /etc/master.passwd
 cp ${etcbackup}passwd /etc/passwd
 cp ${etcbackup}group /etc/group
+cp ${etcbackup}*.db /etc/
+cp ${etcbackup}ssh/ etc/ssh/
 ln -s /etc/init.d/sshd /etc/runlevels/boot/sshd
