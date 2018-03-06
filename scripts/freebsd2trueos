@@ -9,7 +9,7 @@ if [ ! -d "${dist}" ] ; then
 fi
 if [ ! -d "${etcbackup}" ] ; then
   mkdir ${etcbackup}
-  cp -R /etc/ ${etcbackup}"
+  cp -R /etc/ ${etcbackup}
 fi
 if [ ! -f "${dist}/base.txz" ] ; then 
   cd ${dist}
