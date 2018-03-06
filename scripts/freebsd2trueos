@@ -21,7 +21,7 @@ if [ ! -f "${dist}/kernel.txz" ] ; then
 fi
 
 cd ${dist}
-chflags -R noschg
+chflags -R noschg /
 tar -zxvf kernel.txz -C ${release}
 tar -zxvf base.txz -C ${release}
 sysrc -f /boot/defaults/loader.conf boot_mute="NO"
