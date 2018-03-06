@@ -1,29 +1,23 @@
 #!/bin/sh
-dist="/builder/root-fbsd12-amd64"
-tmpdist="/root/tmpdist"
+base="/builder/root-fbsd12-amd64"
+dist="/root/dist"
 
-if [ -d "${tmptist}" ] ; then
-  rm -rf ${tmptist}
+if [ -d "${dist}" ] ; then
+  rm -rf ${dist}
 fi
 
-if [ ! -d "${tmptist}" ] ; then
-  mkdir ${tmptist}
+if [ ! -d "${dist}" ] ; then
+  mkdir ${dist}
 fi
 
-if [ ! -f "${tmptist}/base.txz" ] ; then 
-  cd ${tmptist}
-  fetch http://download.trueos.org/master/amd64/tmptist/base.txz
-fi
-if [ ! -f "${tmptist}/kernel.txz" ] ; then
-  cd ${tmptist}
-  fetch http://download.trueos.org/master/amd64/tmptist/kernel.txz
-fi
-
-if [ ! -f "${tmpdist}/base.txz" ] ; then 
-  cd ${tmpdist}
+if [ ! -f "${dist}/base.txz" ] ; then 
+  cd ${dist}
   fetch http://download.trueos.org/master/amd64/dist/base.txz
 fi
-if [ ! -f "${tmpdist}/kernel.txz" ] ; then
-  cd ${tmpdist}
+if [ ! -f "${dist}/kernel.txz" ] ; then
+  cd ${dist}
   fetch http://download.trueos.org/master/amd64/dist/kernel.txz
 fi
+
+tar -zxvf kernel.txz -C ${base}
+tar -zxvf base.txz -C ${base}
