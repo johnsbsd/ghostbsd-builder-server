@@ -17,23 +17,25 @@ cp -R trueos-repo/ /
 if [ ! -d "${dist}" ] ; then
   mkdir ${dist}
 fi
+
 if [ ! -d "${etcbackup}" ] ; then
   mkdir ${etcbackup}
-  cp -R /etc/ ${etcbackup}
 fi
-if [ ! -f "${dist}/base.txz" ] ; then 
-  cd ${dist}
-  fetch http://download.trueos.org/master/amd64/dist/base.txz
-fi
-if [ ! -f "${dist}/kernel.txz" ] ; then
-  cd ${dist}
-  fetch http://download.trueos.org/master/amd64/dist/kernel.txz
-fi
+
+cp -R /etc/ ${etcbackup}
+cd ${dist}
+fetch http://download.trueos.org/master/amd64/dist/base.txz
+cd ${dist}
+fetch http://download.trueos.org/master/amd64/dist/kernel.txz
+cd ${dist}
+fetch http://download.trueos.org/master/amd64/dist/lib32.txz
+
 
 cd ${dist}
 chflags -R noschg /
 tar -zxvf kernel.txz -C ${release}
 tar -zxvf base.txz -C ${release}
+tar -zxvf lib32.txz -C ${release}
 cp ${etcbackup}master.passwd /etc/master.passwd
 cp ${etcbackup}passwd /etc/passwd
 cp ${etcbackup}group /etc/group

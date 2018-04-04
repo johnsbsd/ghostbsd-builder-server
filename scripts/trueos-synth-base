@@ -10,14 +10,13 @@ if [ ! -d "${dist}" ] ; then
   mkdir ${dist}
 fi
 
-if [ ! -f "${dist}/base.txz" ] ; then 
-  cd ${dist}
-  fetch http://download.trueos.org/master/amd64/dist/base.txz
-fi
-if [ ! -f "${dist}/kernel.txz" ] ; then
-  cd ${dist}
-  fetch http://download.trueos.org/master/amd64/dist/kernel.txz
-fi
+cd ${dist}
+fetch http://download.trueos.org/master/amd64/dist/base.txz
+fetch http://download.trueos.org/master/amd64/dist/kernel.txz
+fetch http://download.trueos.org/master/amd64/dist/lib32.txz
+fetch http://download.trueos.org/master/amd64/dist/src.txz
 
 tar -zxvf kernel.txz -C ${base}
 tar -zxvf base.txz -C ${base}
+tar -zxvf lib32.txz -C ${base}
+tar -zxvf src.txz -C ${base}
