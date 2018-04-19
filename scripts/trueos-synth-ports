@@ -9,5 +9,5 @@ if [ ! -d "${ports}" ] ; then
   mkdir ${ports}
 fi
 
-fetch https://codeload.github.com/trueos/freebsd-ports/zip/trueos-master --no-verify-peer
+fetch https://codeload.github.com/trueos/trueos-ports/zip/trueos-master --no-verify-peer
 tar --strip-components=1 -xf trueos-master -C ${ports}
