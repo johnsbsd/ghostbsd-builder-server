@@ -11,12 +11,14 @@ if [ ! -d "${dist}" ] ; then
 fi
 
 cd ${dist}
-fetch http://download.trueos.org/master/amd64/dist/base.txz
-fetch http://download.trueos.org/master/amd64/dist/kernel.txz
-fetch http://download.trueos.org/master/amd64/dist/lib32.txz
-fetch http://download.trueos.org/master/amd64/dist/src.txz
+fetch http://pkg.trueos.org/iso/unstable/base.txz
+fetch http://pkg.trueos.org/iso/unstable/kernel.txz
+fetch http://pkg.trueos.org/iso/unstable/lib32.txz
+fetch http://pkg.trueos.org/iso/unstable/src.txz
 
-tar -zxvf kernel.txz -C ${base}
+rm -rf ${base}/
+
 tar -zxvf base.txz -C ${base}
+tar -zxvf kernel.txz -C ${base}
 tar -zxvf lib32.txz -C ${base}
 tar -zxvf src.txz -C ${base}
