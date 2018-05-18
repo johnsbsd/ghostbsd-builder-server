@@ -1,0 +1,12 @@
+#!/bin/sh
+#python3.6 /root/makeportslist.py
+cp /builder/full-ports-list /tmp/list_full 
+cp /tmp/list_full /tmp/full_list
+cat /builder/listExcluded | while read pkg
+do
+	(echo "$pkg" | grep -Eq  ^\#) && continue;
+        echo $pkg
+        grep -v $pkg /tmp/list_full > /tmp/list_full2
+        mv /tmp/list_full2 /tmp/list_full
+done
+cp /tmp/list_full /builder/FullList

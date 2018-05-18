@@ -1,0 +1,1 @@
+CCACHE_DIR=/builder/ccache/i386-10 ccache $*

@@ -1,0 +1,233 @@
+# ############################################################################
+# List of ports excluded from list of ports to build
+# This file is processed from /builder/make_gbsd_ports script.
+# MUST NOT contain blank lines, eventually use comments.
+# ############################################################################
+#
+# NOTES: broken packages are grouped, the first is broken
+# the subsequent depend on the broken package and MUST be
+# listed here else they will pull in the broken package.
+# each group is separated by an empy comment line
+# 
+# this file contains a few "sections":
+#
+# 1 BROKEN: the first refer to broken packages
+#
+# 2 OPTION CHECK FAILED:  the second will list packages that are built
+#   successfully but are going to be removed upon rebuild-repository,
+#   thus built for nothing
+#
+# 3 PORTS WE DON'T WANT TO BUILD (bloated older compilers ...)
+#
+# 4 OTHER PORTS WE DON'T WANT TO BUILD, reason explained in comments
+#
+#
+#
+# SECTION 1 = BROKEN PACKAGES ################################################
+#
+devel/stlink
+#
+emulators/gngeo
+#
+www/nginx-full
+#
+cad/brlcad
+#
+games/crafty
+ games/crafty-open-enormous
+ games/crafty-open-large
+ games/crafty-open-medium
+ games/crafty-tablebase-no-pawn
+#
+games/openarena-server
+ games/openarena-oax
+ games/openarena
+#
+misc/sword
+ misc/xiphos
+ misc/bibletime
+#
+graphics/cuneiform
+ graphics/yagf
+#
+devel/cheritrace-devel
+ devel/cherivis-devel
+#
+textproc/randlm
+ math/mosesdecoder
+#
+databases/soci
+#
+biology/bedtools
+#
+databases/sqlitestudio
+#
+math/R-cran-KFAS
+#
+devel/aws-sdk-cpp
+#
+audio/lastfm-desktop
+#
+devel/grumpy
+#
+dns/dnsutl
+#
+devel/R-cran-glmnet
+#
+devel/mico
+#
+games/armagetron
+#
+finance/R-cran-PerformanceAnalytics
+#
+emulators/virtualbox-ose-nox11
+#
+graphics/dspdfviewer
+#
+games/unnethack
+#
+graphics/rawstudio
+#
+lang/qore
+#
+lang/v8-devel
+#
+math/gambit
+#
+net/openafs
+#
+multimedia/mpeg4ip
+#
+net-p2p/retroshare
+#
+lang/pocl
+#
+net/xorp
+#
+science/simlib
+#
+science/py-tensorflow
+#
+security/dsniff
+#
+security/fastd
+ security/fastd-devel
+#
+security/rubygem-ezcrypto
+#
+sysutils/mdcp
+#
+sysutils/burp
+#
+www/ctemplate
+#
+sysutils/catfish
+#
+www/mod_pagespeed
+#
+x11/ghostbsd-gdm-theme
+x11/ghostbsd-kdm-theme
+x11/ghostbsd-ksplash-theme
+x11/kde-installed-settings
+#
+science/paraview
+#
+vietnamese/x-unikey
+#
+www/vdradmin-am
+#
+textproc/apertium
+#
+emulators/xen
+audio/mpdscribble
+games/ember
+games/cheech
+lang/pypy
+x11-toolkits/pypy-tkinter
+databases/pypy-sqlite3
+databases/pypy-gdbm
+#
+# broken, exceed max tmpfs size
+editors/openoffice-4
+editors/openoffice-devel
+# broken
+devel/gcc-arm-embedded
+ devel/libopencm3
+ devel/arduino18
+ devel/arduino-tools
+ devel/arduino-builder
+#
+# we do not build base packages
+base/gcc
+base/binutils
+Makefile
+README
+#
+# SECTION 2 OPTION CHECK FAILED: #############################################
+#
+science/meep
+devel/rudiments
+databases/sqlrelay
+databases/py-sqlrelay@py27
+emulators/dynagen
+emulators/dynamips-community
+lang/elk
+security/snort
+security/snort2pfcd
+emulators/gns3
+japanese/prn
+mail/spfmilter
+security/retranslator
+textproc/unroff
+www/thundercache
+#
+# SECTION 3 = BLOATED/OLDER PORTS ############################################
+#
+# this alone account for 2 GB
+games/iourbanterror
+games/iourbanterror-server
+games/urbanterror-data
+#
+#
+# SECTION 4 = OTHER PORTS WE DON'T WANT TO BUILD #############################
+#
+devel/llvm-devel
+devel/xtoolchain-llvm-devel
+lang/clang-devel
+#
+devel/llvm33
+devel/tesla
+math/freemat
+#
+devel/llvm34
+#
+#devel/llvm35
+#lang/clang35
+#lang/pure
+#devel/pure-stllib
+#devel/pure-readline
+#devel/pure-stldict
+#devel/pure-ffi
+#texproc/pure-xml
+#textproc/pure-csv
+#databases/pure-sql3
+#x11-toolkits/pure-gtk
+#x11-toolkits/pure-tk
+#math/pure-rational
+#math/pure-mpfr
+#net/pure-sockets
+#devel/gnome-builder
+#
+lang/clang38
+devel/lldb38
+devel/llvm38
+security/masscan
+cad/linuxcnc-devel
+devel/bazel-clang38
+devel/ispc
+devel/gps
+devel/android-tools-simpleperf
+databases/clickhouse
+#
+# END OF list ###############################################################
+#

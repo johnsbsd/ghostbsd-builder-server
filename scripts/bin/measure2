@@ -1,0 +1,32 @@
+#!/bin/sh
+avgsize=3000
+elapsed=$(($1 * 60))
+elapsed=${elapsed:-"20"}
+last=`du -sk /builder/jails/gbsd-repos/build/repositories/i386/build/All`
+lcount=`ls -1 /builder/jails/gbsd-repos/build/repositories/i386/build/All | wc -l`
+lcount=$(($lcount * $avgsize))
+last=`echo $last | cut -d ' ' -f 1`
+prev=$last
+sl=1200
+while true
+do
+	last=`du -sk /builder/jails/gbsd-repos/build/repositories/i386/build/All`
+	lcount=`ls -1 /builder/jails/gbsd-repos/build/repositories/i386/build/All | wc -l`
+	last=`echo $last | cut -d ' ' -f 1`
+	lcount=$(($lcount * $avgsize))
+	last=$(($last + $lcount))
+	last=$(($last / 2))
+
+	rate=$(($last / elapsed))
+	rate=$(($rate * 3600))
+	rate=$(($rate / 1024))
+	impulse=$(($last - $prev))
+	impulse=$(($impulse * 3))
+	impulse=$(($impulse / 1024))
+	prev=$last
+	last=$(($last /1024))
+	minutes=$(($elapsed / 60))
+	printf "Elapsed %s mins\t Repo size %s MB\t impulse %s MB/hour\t Rate %s MB/hour\n" $minutes $last $impulse $rate
+	sleep $sl
+	elapsed=$(($elapsed + $sl))
+done

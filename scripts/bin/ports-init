@@ -1,0 +1,104 @@
+#!/bin/sh
+# helper frontend to setup a package building environment
+# (C) 2017 GhostBSD project - asxbsd
+
+
+get_fbsd_ports()
+{
+	if [ -d  /builder/ports ]
+	then
+		cd /builder/ports
+		find . -delete
+		git clone https://github.com/GhostBSD/freebsd-ports /builder/ports
+	fi
+}
+
+get_gbsd_ports()
+{
+	if [ -d  /builder/gbsd-ports/.git ]
+	then
+		cd /builder/gbsd-ports
+		git pull
+	else
+		git clone https://github.com/GhostBSD/ports /builder/gbsd-ports
+	fi
+}
+
+merge_ports()
+{
+	cd /builder/gbsd-ports
+	for dir in *
+	do
+		if [ ${dir} = "README.md" ]; then continue; fi
+		cp -a ${dir} /builder/ports/
+
+		cd /builder/ports/${dir}
+		> Makefile.tmp
+		for category in *
+		do
+			if [ "$category" = "Makefile" ]; then continue ; fi
+			if [ ! -f "$category/Makefile" ]; then continue ; fi
+			echo "    SUBDIR += $category" >> Makefile.tmp
+		done
+		echo "" >> Makefile.tmp
+		echo ".include <bsd.port.subdir.mk>" >> Makefile.tmp
+		mv Makefile.tmp Makefile
+
+		cd /builder/gbsd-ports
+	done
+}
+
+get_options()
+{
+	if [ -d  /builder/options/.git ]
+	then
+		cd /builder/options
+		git pull
+	else
+		git clone https://github.com/GhostBSD/ports-options  /builder/options
+	fi
+}
+
+update_base_11_amd64()
+{
+	if [ -d  /builder/root-fbsd11-amd64 ]
+	then
+		chroot /builder/root-fbsd11-amd64 /bin/sh -c "PAGER=/bin/cat /usr/sbin/freebsd-update fetch install --not-running-from-cron"
+	fi
+}
+
+update_base_11_i386()
+{
+	if [ -d  /builder/root-fbsd11-i386 ]
+	then
+		chroot /builder/root-fbsd11-i386 /bin/sh -c "PAGER=/bin/cat /usr/sbin/freebsd-update fetch install --not-running-from-cron"
+	fi
+}
+
+update_base_10_amd64()
+{
+	if [ -d  /builder/root-fbsd10-amd64 ]
+	then
+		chroot /builder/root-fbsd10-amd64 /bin/sh -c "PAGER=/bin/cat /usr/sbin/freebsd-update fetch install --not-running-from-cron --currently-running 10.4-RELEASE"
+	fi
+}
+
+update_base_10_i386()
+{
+	if [ -d  /builder/root-fbsd10-i386 ]
+	then
+		chroot /builder/root-fbsd10-i386 /bin/sh -c "PAGER=/bin/cat /usr/sbin/freebsd-update fetch install --not-running-from-cron --currently-running 10.4-RELEASE"
+	fi
+}
+
+#### MAIN ####
+get_fbsd_ports
+get_gbsd_ports
+merge_ports
+get_options
+update_base_11_amd64
+update_base_11_i386
+update_base_10_amd64
+update_base_10_i386
+
+return 0

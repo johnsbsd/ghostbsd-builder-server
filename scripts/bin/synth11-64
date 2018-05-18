@@ -1,0 +1,1 @@
+SYNTHPROFILE=GhostBSD-11-amd64 synth $*
